@@ -2,7 +2,7 @@
 if [ ! -e ~/.vim/autoload ]; then
     mkdir -p ~/.vim/autoload 
 fi
-if [ -e ~/.vim/bundle ]; then
+if [ ! -e ~/.vim/bundle ]; then
     mkdir -p ~/.vim/bundle
 fi
 # install pathogen plugin
