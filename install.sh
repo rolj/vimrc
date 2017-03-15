@@ -6,14 +6,38 @@ if [ ! -e ~/.vim/bundle ]; then
     mkdir -p ~/.vim/bundle
 fi
 # install pathogen plugin
-curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+if [ ! -e ~/.vim/autoload/pathogen.vim ]; then
+    curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+fi
+
+# save path
+orig_path=`pwd`
 
 # install plugins
 cd ~/.vim/bundle
-git clone https://github.com/scrooloose/nerdtree.git
-git clone https://github.com/vim-scripts/YankRing.vim.git
-git clone git://github.com/tpope/vim-sensible.git
-cd -
+if [ -e nerdtree ]; then
+    cd nerdtree 
+    git pull
+    cd -
+else
+    git clone https://github.com/scrooloose/nerdtree.git
+fi
+if [ -e YankRing.vim ]; then
+    cd YankRing.vim
+    git pull
+    cd -
+else
+    git clone https://github.com/vim-scripts/YankRing.vim.git
+fi
+if [ -e vim-sensible ]; then
+    cd vim-sensible
+    git pull
+    cd -
+else
+    git clone git://github.com/tpope/vim-sensible.git
+fi
+
+cd ${orig_path}
 
 # backup vimrc
 if [ -e ~/.vimrc ]; then
@@ -21,8 +45,7 @@ if [ -e ~/.vimrc ]; then
 fi
 
 # create vimrc
-echo '
-" tab spacing
+echo '" tab spacing
 set number
 set tabstop=8
 set shiftwidth=4
