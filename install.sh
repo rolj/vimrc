@@ -37,6 +37,21 @@ else
     git clone git://github.com/tpope/vim-sensible.git
 fi
 
+if [ -e nginx.vim ]; then
+    cd nginx.vim
+    git pull
+    cd -
+else
+    git clone https://github.com/chr4/nginx.vim.git 
+fi
+
+if [ -e vim-jinja ]; then
+    cd vim-jinja
+    git pull
+    cd -
+else
+    git clone https://github.com/lepture/vim-jinja.git
+fi
 cd ${orig_path}
 
 # backup vimrc
@@ -64,5 +79,7 @@ nnoremap <silent> <C-h> <C-w>h
 nnoremap <silent> <C-l> <C-w>l
 nnoremap <silent> <C-k> <C-w>k
 nnoremap <silent> <C-j> <C-w>j
+
+au BufNewFile,BufRead *.html,*.htm,*.shtml,*.stm set ft=jinja
 ' > ~/.vimrc
 
